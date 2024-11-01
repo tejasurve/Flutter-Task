@@ -44,7 +44,7 @@ class SplashScreenState extends State<SplashScreen> {
           context,
           MaterialPageRoute(
             builder: (context) => ReelsScreen(),
-          ), 
+          ),
         );
       });
     });
@@ -53,8 +53,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          const Color.fromARGB(255, 50, 49, 49), 
+      backgroundColor: const Color.fromARGB(255, 50, 49, 49),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,24 +62,24 @@ class SplashScreenState extends State<SplashScreen> {
               opacity: _visible ? 1.0 : 0.0,
               duration: const Duration(seconds: 2),
               child: Image.asset(
-                'assets/images/welcome.png', 
-                height: 200, 
+                'assets/images/welcome.png',
+                height: 200,
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
+            Text(
               'Flutter App',
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               'Explore the world of Flutter',
               style: TextStyle(
-                color: Colors.white70,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 16,
               ),
             ),
