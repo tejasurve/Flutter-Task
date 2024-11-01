@@ -48,12 +48,14 @@ class VideoScreenState extends State<VideoScreen> {
   }
 
   void _seekForward() {
-    final newPosition = _controller.value.position + const Duration(seconds: 10);
+    final newPosition =
+        _controller.value.position + const Duration(seconds: 10);
     _controller.seekTo(newPosition);
   }
 
   void _seekBackward() {
-    final newPosition = _controller.value.position - const Duration(seconds: 10);
+    final newPosition =
+        _controller.value.position - const Duration(seconds: 10);
     _controller.seekTo(newPosition);
   }
 
@@ -69,7 +71,9 @@ class VideoScreenState extends State<VideoScreen> {
                     aspectRatio: _controller.value.aspectRatio,
                     child: CachedVideoPlayerPlus(_controller),
                   )
-                : const CircularProgressIndicator(), // Loading indicator while initializing
+                : CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.surface,
+                  ), 
           ),
           Positioned(
             top: 40,
@@ -81,7 +85,6 @@ class VideoScreenState extends State<VideoScreen> {
               },
             ),
           ),
-          // Custom Controls Overlay
           Positioned(
             bottom: 20,
             left: 0,
@@ -123,7 +126,9 @@ class _ControlsOverlay extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              controller.value.isPlaying ? controller.pause() : controller.play();
+              controller.value.isPlaying
+                  ? controller.pause()
+                  : controller.play();
             },
           ),
           IconButton(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task/blocs/content/content_bloc_bloc.dart';
 import 'package:flutter_task/presentation/pages/reels_screen.dart';
-import 'package:flutter_task/resources/utils/layout.dart';
+import 'package:flutter_task/presentation/pages/splash_screen.dart';
 import 'package:flutter_task/service_locator/service_locator.dart';
 
 Future<void> main() async {
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ReelsScreen(),
+      home: const SplashScreen(),
     );
   }
 }

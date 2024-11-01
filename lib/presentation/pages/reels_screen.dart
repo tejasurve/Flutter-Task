@@ -87,7 +87,10 @@ class ReelsScreenState extends State<ReelsScreen> {
         itemCount: _reels.length + (_isLoadingMore ? 1 : 0),
         itemBuilder: (context, index) {
           if (index == _reels.length) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+                child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.surface,
+            ));
           }
           // Each reel card in the list
           return GestureDetector(
