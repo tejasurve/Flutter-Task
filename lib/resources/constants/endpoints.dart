@@ -12,5 +12,5 @@ class Endpoints {
   static final isMock = serviceLocator<NetworkConfig>().isMock;
   static String get getContentData => isMock
       ? 'get_mobile_offering_configuration'
-      : '/bytes/all?page=1&limit=10&country=United+States';
+      : '/bytes/all?page={pageNo}&limit=10&country=United+States';
 }

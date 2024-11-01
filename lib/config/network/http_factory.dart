@@ -5,15 +5,8 @@
  * Copyright (c) Tejas Surve
  */
 
-/*
- * Created by Ahmad Manaa on Thu Jul 25 2024
- */
-
-/*
- * Created by Ahmad Manaa on Thu Jul 25 2024
- */
-
 import 'dart:io';
+import 'package:flutter_task/config/network/http_logging_client.dart';
 import 'package:flutter_task/config/network/network_config.dart';
 import 'package:flutter_task/service_locator/service_locator.dart';
 import 'package:http/http.dart' as http;
@@ -21,8 +14,9 @@ import 'package:http/http.dart' as http;
 class HttpFactory {
   http.Client getClient() {
     final client = http.Client();
+    
     // Customize the client if needed
-    return client;
+    return HttpLoggingClient(client);
   }
 
   Map<String, String> getHeaders() {

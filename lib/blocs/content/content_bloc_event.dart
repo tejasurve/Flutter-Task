@@ -1,3 +1,10 @@
+/*
+ * Created on Sat Nov 02 2024
+ * Created by Tejas Surve
+ *
+ * Copyright (c) Tejas Surve
+ */
+
 part of 'content_bloc_bloc.dart';
 
 sealed class ContentBlocEvent extends Equatable {
@@ -8,7 +15,8 @@ sealed class ContentBlocEvent extends Equatable {
 }
 
 class FetchContentData extends ContentBlocEvent {
-  const FetchContentData();
+  final int page;
+  const FetchContentData(this.page);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page];
 }
