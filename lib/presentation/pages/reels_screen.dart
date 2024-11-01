@@ -72,7 +72,7 @@ class ReelsScreenState extends State<ReelsScreen> {
   void _fetchAdditionalContent() {
     setState(() {
       _isLoadingMore = true;
-      page++; // Increment the page counter each time more content is fetched
+      page++; 
     });
     contentBlocBloc.add(FetchContentData(page));
     _listenForContentData();
@@ -82,25 +82,37 @@ class ReelsScreenState extends State<ReelsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: _reels.length + (_isLoadingMore ? 1 : 0),
-        itemBuilder: (context, index) {
-          if (index == _reels.length) {
-            return Center(
-                child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.surface,
-            ));
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification scrollInfo) {
+          if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
+              !_isLoadingMore &&
+              _hasMore) {
+            _fetchAdditionalContent();
           }
-          // Each reel card in the list
-          return GestureDetector(
-            onTap: () => _openVideoScreen(_reels[index]),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: rSize(context, 8)),
-              child: ReelCard(reel: _reels[index]),
-            ),
-          );
+          return true; 
         },
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(), 
+          controller: _scrollController,
+          itemCount: _reels.length + (_isLoadingMore ? 1 : 0),
+          itemBuilder: (context, index) {
+            if (index == _reels.length) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
+              );
+            }
+            // Each reel card in the list
+            return GestureDetector(
+              onTap: () => _openVideoScreen(_reels[index]),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: rSize(context, 8)),
+                child: ReelCard(reel: _reels[index]),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

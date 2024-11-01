@@ -73,7 +73,7 @@ class VideoScreenState extends State<VideoScreen> {
                   )
                 : CircularProgressIndicator(
                     color: Theme.of(context).colorScheme.surface,
-                  ), 
+                  ),
           ),
           Positioned(
             top: 40,
@@ -101,7 +101,7 @@ class VideoScreenState extends State<VideoScreen> {
   }
 }
 
-class _ControlsOverlay extends StatelessWidget {
+class _ControlsOverlay extends StatefulWidget {
   final CachedVideoPlayerPlusController controller;
   final VoidCallback onSeekForward;
   final VoidCallback onSeekBackward;
@@ -113,6 +113,11 @@ class _ControlsOverlay extends StatelessWidget {
   });
 
   @override
+  __ControlsOverlayState createState() => __ControlsOverlayState();
+}
+
+class __ControlsOverlayState extends State<_ControlsOverlay> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black54,
@@ -122,26 +127,31 @@ class _ControlsOverlay extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(
-              controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+              widget.controller.value.isPlaying
+                  ? Icons.pause
+                  : Icons.play_arrow,
               color: Colors.white,
             ),
             onPressed: () {
-              controller.value.isPlaying
-                  ? controller.pause()
-                  : controller.play();
+              if (widget.controller.value.isPlaying) {
+                widget.controller.pause();
+              } else {
+                widget.controller.play();
+              }
+              setState(() {}); // Call setState to rebuild the widget
             },
           ),
           IconButton(
             icon: const Icon(Icons.replay_10, color: Colors.white),
-            onPressed: onSeekBackward,
+            onPressed: widget.onSeekBackward,
           ),
           IconButton(
             icon: const Icon(Icons.forward_10, color: Colors.white),
-            onPressed: onSeekForward,
+            onPressed: widget.onSeekForward,
           ),
           Expanded(
             child: VideoProgressIndicator(
-              controller,
+              widget.controller,
               allowScrubbing: true,
               padding: const EdgeInsets.symmetric(horizontal: 10),
             ),
